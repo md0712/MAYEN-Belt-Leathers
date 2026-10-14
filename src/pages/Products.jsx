@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import SectionTitle from '../components/SectionTitle';
 import { products } from '../data/products';
 import { beltCategories } from '../data/categories';
-import { Filter, Check, ArrowRight, Eye, X, Star, Heart, Scan } from 'lucide-react';
+import { Filter, Check, ArrowRight, Eye, X, Star, Heart, Scan, ShoppingBag } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 
 export default function Products({ onOpenQuote, onNavigate }) {
@@ -81,154 +81,187 @@ export default function Products({ onOpenQuote, onNavigate }) {
           ))}
         </div>
 
-        {/* Products Grid - 2-Column Mobile & Multi-Column Desktop Layout */}
-        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-5 mt-6 sm:mt-8">
+        {/* Products Grid - Mobile Full-Width Responsive & Multi-Column Desktop */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-6 mt-6 sm:mt-8">
           {filteredProducts.map((prod) => (
             <div 
               key={prod.id}
               onClick={() => setSelectedProduct(prod)}
-              className="bg-white rounded-[1.75rem] sm:rounded-2xl overflow-hidden border border-stone-200 hover:border-stone-400 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col group active:scale-[0.99] cursor-pointer"
+              className="group bg-[#faf6f0] rounded-[2rem] overflow-hidden border border-[#A47148]/25 shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col cursor-pointer active:scale-[0.99] relative bg-cover bg-center"
+              style={{ backgroundImage: `url('/images/footer-leather.jpg')` }}
             >
-              {/* Product Image - Overlapping Black and Brown Belts */}
-              <div className="relative aspect-[3/4] sm:aspect-[16/11] overflow-hidden bg-stone-100">
-                {/* Base Main Belt Photo */}
-                <img 
-                  src={prod.image} 
-                  alt={prod.name} 
-                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
-                  loading="lazy"
-                />
-
-                {/* Overlapping Inset: Brown Belt in Bottom-Right with White Curved Border */}
-                <div className="absolute right-0 bottom-0 w-[58%] h-[50%] overflow-hidden rounded-tl-[1.8rem] sm:rounded-tl-[2rem] border-t-4 border-l-4 border-white shadow-[-6px_-6px_16px_rgba(0,0,0,0.14)] z-10">
+              <div className="bg-[#faf6f0]/92 backdrop-blur-[0.5px] flex flex-col flex-1 h-full">
+                {/* Product Image - Overlapping Black and Brown Belts */}
+                <div className="relative aspect-[4/3] sm:aspect-[16/11] overflow-hidden bg-stone-200">
+                  {/* Base Primary Belt Photo */}
                   <img 
-                    src="/images/casual-belts.jpg" 
-                    alt={`${prod.name} Brown Belt`}
-                    className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 ease-out"
+                    src={prod.image} 
+                    alt={prod.name} 
+                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
                     loading="lazy"
                   />
-                </div>
 
-                {/* Top-Right: Floating Heart Icon in a White Circle */}
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                  }}
-                  className="absolute top-2.5 right-2.5 sm:top-3 sm:right-3 z-20 w-8 h-8 rounded-full bg-white shadow-md flex items-center justify-center hover:scale-110 active:scale-95 transition-all"
-                  aria-label="Save to Wishlist"
-                >
-                  <Heart className="w-4 h-4 fill-[#e0533c] text-[#e0533c]" />
-                </button>
-
-                {/* Bottom-Left: Floating Pill "QUOTE" in Tan Brown */}
-                <div className="absolute bottom-2.5 left-2.5 z-20">
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onOpenQuote(prod.name);
-                    }}
-                    className="px-3.5 py-1 sm:px-4 sm:py-1.5 rounded-full bg-[#8c4d28] hover:bg-[#733e1e] active:scale-95 text-white text-[10.5px] sm:text-xs font-bold uppercase tracking-wider shadow-lg transition-all"
-                  >
-                    QUOTE
-                  </button>
-                </div>
-
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setSelectedProduct(prod);
-                  }}
-                  className="hidden sm:flex absolute bottom-2.5 right-2.5 z-20 p-1.5 sm:p-2 rounded-full bg-white text-stone-800 hover:bg-stone-950 hover:text-white shadow-md transition-all opacity-0 group-hover:opacity-100"
-                  title="Quick View Specs"
-                >
-                  <Eye className="w-3.5 h-3.5" />
-                </button>
-              </div>
-
-              {/* Mobile Compact Card View with Cart Footer (< sm) */}
-              <div className="sm:hidden p-2.5 sm:p-3 pt-2 sm:pt-2.5 flex flex-col justify-between flex-1 bg-white">
-                <div>
-                  <h3 className="font-sans font-bold text-xs text-stone-900 truncate leading-snug">
-                    {prod.name}
-                  </h3>
-                  <p className="text-[10px] sm:text-[11px] text-stone-400 font-medium truncate mt-0.5">
-                    {prod.leatherType}
-                  </p>
-                </div>
-                <div className="flex items-center justify-between pt-2 mt-1.5 border-t border-stone-100">
-                  <span className="font-bold text-xs text-stone-950 font-sans">
-                    $33.00
-                  </span>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      addToCart({
-                        id: prod.id,
-                        name: prod.name,
-                        sku: prod.sku,
-                        image: prod.image,
-                        price: 33.00,
-                        color: prod.colors[0],
-                        width: prod.widths[0]
-                      });
-                      if (onNavigate) onNavigate('cart');
-                      else window.location.hash = 'cart';
-                    }}
-                    className="px-2.5 py-1 rounded-full bg-[#8c4d28] hover:bg-[#733e1e] active:scale-95 text-white text-[10px] font-bold shadow-sm transition-all"
-                  >
-                    Add to Cart
-                  </button>
-                </div>
-              </div>
-
-              {/* Desktop / Tablet Full Product Body (sm:) */}
-              <div className="hidden sm:flex p-3.5 sm:p-4 flex-1 flex-col justify-between">
-                <div>
-                  <h3 className="font-serif text-base sm:text-lg font-bold text-stone-950 mb-1 leading-snug line-clamp-1 group-hover:text-cognac transition-colors">
-                    {prod.name}
-                  </h3>
-                  <p className="text-[11px] sm:text-xs text-stone-600 line-clamp-2 mb-2.5 leading-relaxed">
-                    {prod.description}
-                  </p>
-
-                  {/* Compact Specifications Box */}
-                  <div className="space-y-0.5 bg-stone-50 p-2 sm:p-2.5 rounded-lg border border-stone-200/80 text-[10.5px] sm:text-[11px] mb-2.5">
-                    <p className="text-stone-700 truncate"><strong>Leather:</strong> {prod.leatherType}</p>
-                    <p className="text-stone-700 truncate"><strong>Buckle:</strong> {prod.buckleType}</p>
-                    <p className="text-stone-700 truncate"><strong>Widths:</strong> {prod.widths.join(', ')}</p>
+                  {/* Overlapping Inset: Brown Belt in Bottom-Right with White Curved Border */}
+                  <div className="absolute right-0 bottom-0 w-[58%] h-[52%] overflow-hidden rounded-tl-[2.2rem] sm:rounded-tl-[2.5rem] border-t-4 border-l-4 border-white shadow-[-6px_-6px_18px_rgba(0,0,0,0.16)] z-10">
+                    <img 
+                      src="/images/casual-belts.jpg" 
+                      alt={`${prod.name} Brown Belt`}
+                      className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 ease-out"
+                      loading="lazy"
+                    />
                   </div>
 
-                  {/* Standard Colorways */}
-                  <div className="mb-2.5">
-                    <span className="text-[9.5px] font-semibold uppercase tracking-wider text-stone-500 block mb-1">
-                      Standard Colorways:
+                  {/* Top-Right: Floating Heart Icon in a White Circle */}
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                    }}
+                    className="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 z-20 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white shadow-lg flex items-center justify-center text-stone-900 hover:scale-110 active:scale-95 transition-all"
+                    aria-label="Save to Wishlist"
+                  >
+                    <Heart className="w-4 h-4 sm:w-4.5 sm:h-4.5 fill-[#e0533c] text-[#e0533c]" />
+                  </button>
+
+                  {/* Bottom-Left Edge Overlapping: Bright Yellow Floating QUOTE Button */}
+                  <div className="absolute -bottom-4 left-4 sm:left-5 z-20">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onOpenQuote(prod.name);
+                      }}
+                      className="px-6 py-2.5 sm:px-7 sm:py-3 rounded-full bg-[#FFD200] hover:bg-[#FFC000] active:scale-95 text-stone-950 text-xs sm:text-xs font-black uppercase tracking-wider shadow-[0_6px_18px_rgba(255,210,0,0.45)] transition-all flex items-center gap-1.5"
+                    >
+                      <span>QUOTE</span>
+                    </button>
+                  </div>
+
+                  {/* Quick View Button for Desktop */}
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedProduct(prod);
+                    }}
+                    className="hidden sm:flex absolute bottom-3 right-3 z-20 p-2 rounded-full bg-white/90 text-stone-800 hover:bg-stone-950 hover:text-white shadow-md transition-all opacity-0 group-hover:opacity-100"
+                    title="Quick View Specs"
+                  >
+                    <Eye className="w-4 h-4" />
+                  </button>
+                </div>
+
+                {/* Mobile Full-Width Card Footer with Direct Cart Action (< sm) */}
+                <div className="sm:hidden pt-7 p-4 bg-white/95 flex flex-col justify-between border-t border-stone-200/60 flex-1">
+                  <div>
+                    <div className="flex items-start justify-between gap-2">
+                      <h3 className="font-sans font-bold text-sm text-stone-950 truncate leading-snug">
+                        {prod.name}
+                      </h3>
+                      <span className="font-bold text-sm text-stone-950 font-sans whitespace-nowrap">
+                        $33.00
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-stone-500 font-medium truncate mt-0.5">
+                      {prod.leatherType} &bull; Black / Brown Duo
+                    </p>
+                  </div>
+
+                  {/* Direct Add to Cart Action in Tan Brown */}
+                  <div className="pt-2.5 mt-2.5 border-t border-stone-100 flex items-center justify-between gap-2">
+                    <span className="text-[10.5px] text-stone-400 font-medium uppercase tracking-wider">
+                      100% Full-Grain
                     </span>
-                    <div className="flex flex-wrap gap-1">
-                      {prod.colors.map((color, idx) => (
-                        <span key={idx} className="px-1.5 py-0.5 rounded bg-stone-100 text-stone-800 text-[9.5px] border border-stone-200">
-                          {color}
-                        </span>
-                      ))}
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        addToCart({
+                          id: prod.id,
+                          name: prod.name,
+                          sku: prod.sku,
+                          image: prod.image,
+                          price: 33.00,
+                          color: prod.colors[0],
+                          width: prod.widths[0]
+                        });
+                        if (onNavigate) onNavigate('cart');
+                        else window.location.hash = 'cart';
+                      }}
+                      className="px-3.5 py-1.5 rounded-full bg-[#8c4d28] hover:bg-[#733e1e] active:scale-95 text-white text-[11px] font-bold shadow-sm transition-all flex items-center gap-1.5"
+                    >
+                      <ShoppingBag className="w-3.5 h-3.5" />
+                      <span>Add to Cart</span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Desktop / Tablet Full Product Body (sm:) */}
+                <div className="hidden sm:flex pt-8 p-5 sm:p-6 flex-1 flex-col justify-between bg-white/90">
+                  <div>
+                    <div className="flex items-start justify-between gap-2 mb-1">
+                      <h3 className="font-serif text-lg font-bold text-stone-950 leading-snug line-clamp-1 group-hover:text-cognac transition-colors">
+                        {prod.name}
+                      </h3>
+                      <span className="font-bold text-base text-stone-950 font-sans whitespace-nowrap">
+                        $33.00
+                      </span>
+                    </div>
+                    <p className="text-xs text-stone-600 line-clamp-2 mb-3 leading-relaxed">
+                      {prod.description}
+                    </p>
+
+                    {/* Compact Specifications Box */}
+                    <div className="space-y-1 bg-[#faf7f4] p-3 rounded-xl border border-stone-200/80 text-[11px] mb-3">
+                      <p className="text-stone-700 truncate"><strong>Leather:</strong> {prod.leatherType}</p>
+                      <p className="text-stone-700 truncate"><strong>Buckle:</strong> {prod.buckleType}</p>
+                      <p className="text-stone-700 truncate"><strong>Widths:</strong> {prod.widths.join(', ')}</p>
+                    </div>
+
+                    {/* Standard Colorways */}
+                    <div className="mb-3">
+                      <span className="text-[10px] font-semibold uppercase tracking-wider text-stone-500 block mb-1">
+                        Standard Colorways:
+                      </span>
+                      <div className="flex flex-wrap gap-1">
+                        {prod.colors.map((color, idx) => (
+                          <span key={idx} className="px-2 py-0.5 rounded-md bg-stone-100 text-stone-800 text-[10px] border border-stone-200 font-medium">
+                            {color}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                {/* Price Estimate & CTA Button */}
-                <div className="pt-2.5 border-t border-stone-100 flex items-center justify-between gap-2">
-                  <div>
-                    <span className="text-[9px] uppercase tracking-wider text-stone-500 block">Wholesale Guide</span>
-                    <span className="text-xs sm:text-sm font-bold text-stone-900 font-serif">{prod.priceEstimate}</span>
+                  {/* Actions Row */}
+                  <div className="pt-3 border-t border-stone-200/70 flex items-center justify-between gap-2">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        addToCart({
+                          id: prod.id,
+                          name: prod.name,
+                          sku: prod.sku,
+                          image: prod.image,
+                          price: 33.00,
+                          color: prod.colors[0],
+                          width: prod.widths[0]
+                        });
+                        if (onNavigate) onNavigate('cart');
+                        else window.location.hash = 'cart';
+                      }}
+                      className="px-3.5 py-2 rounded-xl bg-[#8c4d28] hover:bg-[#733e1e] active:scale-95 text-white text-xs font-bold transition-all flex items-center gap-1.5 shadow-sm"
+                    >
+                      <ShoppingBag className="w-3.5 h-3.5" />
+                      <span>Add to Cart</span>
+                    </button>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onOpenQuote(prod.name);
+                      }}
+                      className="px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider text-white bg-stone-950 hover:bg-stone-800 active:scale-95 transition-all flex items-center gap-1 shadow-sm whitespace-nowrap"
+                    >
+                      <span>Inquire</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </button>
                   </div>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onOpenQuote(prod.name);
-                    }}
-                    className="px-3 py-1.5 sm:py-2 rounded-lg text-[10.5px] sm:text-xs font-bold uppercase tracking-wider text-white bg-stone-950 hover:bg-stone-800 active:scale-95 transition-all flex items-center gap-1 shadow-sm whitespace-nowrap"
-                  >
-                    <span>Request Quote</span>
-                    <ArrowRight className="w-3 h-3" />
-                  </button>
                 </div>
               </div>
             </div>
