@@ -156,7 +156,7 @@ export default function Products({ onOpenQuote, onNavigate }) {
                         {prod.name}
                       </h3>
                       <span className="font-bold text-sm text-stone-950 font-sans whitespace-nowrap">
-                        $33.00
+                        ₹{(prod.price || 2499).toLocaleString('en-IN')}
                       </span>
                     </div>
                     <p className="text-[11px] text-stone-500 font-medium truncate mt-0.5">
@@ -177,7 +177,7 @@ export default function Products({ onOpenQuote, onNavigate }) {
                           name: prod.name,
                           sku: prod.sku,
                           image: prod.image,
-                          price: 33.00,
+                          price: prod.price || 2499,
                           color: prod.colors[0],
                           width: prod.widths[0]
                         });
@@ -200,7 +200,7 @@ export default function Products({ onOpenQuote, onNavigate }) {
                         {prod.name}
                       </h3>
                       <span className="font-bold text-base text-stone-950 font-sans whitespace-nowrap">
-                        $33.00
+                        ₹{(prod.price || 2499).toLocaleString('en-IN')}
                       </span>
                     </div>
                     <p className="text-xs text-stone-600 line-clamp-2 mb-3 leading-relaxed">
@@ -239,7 +239,7 @@ export default function Products({ onOpenQuote, onNavigate }) {
                           name: prod.name,
                           sku: prod.sku,
                           image: prod.image,
-                          price: 33.00,
+                          price: prod.price || 2499,
                           color: prod.colors[0],
                           width: prod.widths[0]
                         });

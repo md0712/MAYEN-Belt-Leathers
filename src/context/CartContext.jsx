@@ -8,12 +8,22 @@ export function CartProvider({ children }) {
       const saved = localStorage.getItem('mayen_cart');
       if (saved) {
         const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          // Gracefully migrate any previously saved USD items to INR
+          return parsed.map(item => {
+            const inrPrice = item.price && item.price < 100 ? 2499 : (item.price || 2499);
+            return {
+              ...item,
+              price: inrPrice,
+              priceFormatted: `₹${inrPrice.toLocaleString('en-IN')}`
+            };
+          });
+        }
       }
     } catch (e) {
       console.error("Failed to load cart from localStorage", e);
     }
-    // Seed with an initial sample belt so the user immediately sees the populated Cart page
+    // Seed with an initial sample belt in Indian Rupees (INR)
     return [
       {
         id: "mb-001",
@@ -23,8 +33,8 @@ export function CartProvider({ children }) {
         image: "/images/formal-belts.jpg",
         color: "Obsidian Black",
         width: "32mm",
-        price: 33.00,
-        priceFormatted: "$33.00",
+        price: 2499,
+        priceFormatted: "₹2,499",
         quantity: 1,
       }
     ];
@@ -45,7 +55,7 @@ export function CartProvider({ children }) {
       
       const itemPrice = typeof product.price === 'number' 
         ? product.price 
-        : 33.00;
+        : 2499;
 
       if (existing) {
         return prev.map(item => item === existing ? { ...item, quantity: item.quantity + (options.quantity || 1) } : item);
@@ -62,7 +72,7 @@ export function CartProvider({ children }) {
           color: selectedColor,
           width: options.width || (product.widths && product.widths[0]) || "32mm",
           price: itemPrice,
-          priceFormatted: `$${itemPrice.toFixed(2)}`,
+          priceFormatted: `₹${itemPrice.toLocaleString('en-IN')}`,
           quantity: options.quantity || 1,
         }
       ];

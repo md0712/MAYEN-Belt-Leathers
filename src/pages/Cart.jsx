@@ -40,11 +40,11 @@ export default function Cart({ onNavigate, onOpenQuote }) {
   const generateWhatsAppUrl = () => {
     let orderText = `Hello MAYEN Leather team, I would like to place an order for the following items:\n\n`;
     cartItems.forEach((item, idx) => {
-      orderText += `${idx + 1}. ${item.name} (${item.sku || 'SKU'})\n   - Color: ${item.color}\n   - Width: ${item.width}\n   - Quantity: ${item.quantity}\n   - Price: $${(item.price * item.quantity).toFixed(2)}\n\n`;
+      orderText += `${idx + 1}. ${item.name} (${item.sku || 'SKU'})\n   - Color: ${item.color}\n   - Width: ${item.width}\n   - Quantity: ${item.quantity}\n   - Price: ₹${(item.price * item.quantity).toLocaleString('en-IN')}\n\n`;
     });
-    orderText += `Subtotal: $${subtotal.toFixed(2)}\n`;
-    if (discount > 0) orderText += `Discount: -$${discount.toFixed(2)}\n`;
-    orderText += `Estimated Total: $${finalTotal.toFixed(2)}\n\nPlease provide invoice and shipping timeline.`;
+    orderText += `Subtotal: ₹${subtotal.toLocaleString('en-IN')}\n`;
+    if (discount > 0) orderText += `Discount: -₹${discount.toLocaleString('en-IN')}\n`;
+    orderText += `Estimated Total: ₹${finalTotal.toLocaleString('en-IN')}\n\nPlease provide invoice and shipping timeline.`;
 
     const phone = companyInfo.contact.whatsapp.replace(/[^0-9]/g, '');
     return `https://web.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(orderText)}`;
@@ -163,7 +163,7 @@ export default function Cart({ onNavigate, onOpenQuote }) {
                         </span>
                       </div>
                       <p className="text-[11px] font-bold text-stone-900 mt-1 sm:hidden">
-                        ${item.price.toFixed(2)} each
+                        ₹{item.price.toLocaleString('en-IN')} each
                       </p>
                     </div>
                   </div>
@@ -175,7 +175,7 @@ export default function Cart({ onNavigate, onOpenQuote }) {
                     <div className="hidden sm:block text-right">
                       <span className="text-[10px] uppercase tracking-wider text-stone-400 block font-medium">Unit Price</span>
                       <span className="text-xs font-bold text-stone-700 font-sans">
-                        ${item.price.toFixed(2)}
+                        ₹{item.price.toLocaleString('en-IN')}
                       </span>
                     </div>
 
@@ -204,7 +204,7 @@ export default function Cart({ onNavigate, onOpenQuote }) {
                     <div className="text-right min-w-[60px] sm:min-w-[70px]">
                       <span className="text-[9.5px] sm:text-[10px] uppercase tracking-wider text-stone-400 block font-medium">Subtotal</span>
                       <span className="text-xs sm:text-sm font-bold text-stone-950 font-sans">
-                        ${(item.price * item.quantity).toFixed(2)}
+                        ₹{(item.price * item.quantity).toLocaleString('en-IN')}
                       </span>
                     </div>
 
@@ -278,25 +278,25 @@ export default function Cart({ onNavigate, onOpenQuote }) {
                 <div className="space-y-3 pt-4 border-t border-stone-100 text-xs sm:text-sm">
                   <div className="flex justify-between text-stone-600">
                     <span>Items Subtotal ({totalItems})</span>
-                    <span className="font-semibold text-stone-900 font-sans">${subtotal.toFixed(2)}</span>
+                    <span className="font-semibold text-stone-900 font-sans">₹{subtotal.toLocaleString('en-IN')}</span>
                   </div>
 
                   {discount > 0 && (
                     <div className="flex justify-between text-[#8c4d28] font-medium">
                       <span>Promo Discount (10%)</span>
-                      <span>-${discount.toFixed(2)}</span>
+                      <span>-₹{discount.toLocaleString('en-IN')}</span>
                     </div>
                   )}
 
                   <div className="flex justify-between text-stone-600">
-                    <span>Global Express Shipping</span>
+                    <span>Express Delivery across India</span>
                     <span className="text-[#8c4d28] font-bold uppercase text-[11px] bg-[#A47148]/10 px-2 py-0.5 rounded border border-[#A47148]/25">
                       FREE (Included)
                     </span>
                   </div>
 
                   <div className="flex justify-between text-stone-600">
-                    <span>Export Packaging & Box</span>
+                    <span>Luxury Leather Box & Dust Bag</span>
                     <span className="text-stone-900 font-medium">Included</span>
                   </div>
 
@@ -306,10 +306,10 @@ export default function Cart({ onNavigate, onOpenQuote }) {
                     </span>
                     <div className="text-right">
                       <span className="font-serif text-2xl sm:text-3xl font-extrabold text-stone-950">
-                        ${finalTotal.toFixed(2)}
+                        ₹{finalTotal.toLocaleString('en-IN')}
                       </span>
                       <span className="text-[10px] text-stone-400 block font-sans">
-                        USD (Factory Ex-Works / FOB)
+                        INR (All Taxes & Duties Included)
                       </span>
                     </div>
                   </div>

@@ -10,7 +10,8 @@ export const products = [
     buckleType: "Mirror-Polished Palladium Solid Brass",
     widths: ["30mm", "32mm"],
     colors: ["Obsidian Black", "Deep Mahogany", "Rich Burgundy"],
-    priceEstimate: "$28 - $42 (Wholesale / Bulk)",
+    price: 2499,
+    priceEstimate: "₹2,400 - ₹3,500 (Wholesale / Bulk)",
     description: "Constructed with precision feathered edges and ultra-dense micro-stitching. Features a soft nubuck leather backing for supreme comfort against tailored suit trousers.",
     details: [
       "Full-grain European cowhide tanned in Tuscany",
@@ -30,7 +31,8 @@ export const products = [
     buckleType: "Heavy Solid Antique Brass Roller Buckle",
     widths: ["38mm", "40mm"],
     colors: ["Saddle Tan", "Cognac Brown", "Distressed Black"],
-    priceEstimate: "$22 - $34 (Wholesale / Bulk)",
+    price: 1999,
+    priceEstimate: "₹1,800 - ₹2,800 (Wholesale / Bulk)",
     description: "An indestructible, rugged workhorse cut from the thickest part of the hide. Tanned with tree bark tannins to age gracefully with an irreplaceable golden patina.",
     details: [
       "One solid strip of leather (No laminations or fillers)",
@@ -50,7 +52,8 @@ export const products = [
     buckleType: "Brushed Vintage Gold Solid Brass",
     widths: ["35mm"],
     colors: ["Chestnut Brown", "Tobacco Tan", "Navy / Tan Duo"],
-    priceEstimate: "$26 - $38 (Wholesale / Bulk)",
+    price: 2299,
+    priceEstimate: "₹2,200 - ₹3,200 (Wholesale / Bulk)",
     description: "Painstakingly plaited by hand across 4 hours of bench labor. Offers infinitesimal micro-adjustability as the prong slips effortlessly anywhere through the weave.",
     details: [
       "100% genuine leather weave with supple hand feel",
@@ -70,7 +73,8 @@ export const products = [
     buckleType: "Lost-Wax Cast Bronze Sculptural Emblem",
     widths: ["38mm", "42mm"],
     colors: ["Dark Espresso", "Vintage Oxblood", "Midnight Patina"],
-    priceEstimate: "$35 - $55 (Wholesale / Bulk)",
+    price: 3499,
+    priceEstimate: "₹2,900 - ₹4,600 (Wholesale / Bulk)",
     description: "A luxury statement piece blending haute horlogerie cast metalwork with artisanal deep-embossed leather motifs.",
     details: [
       "Sculpted buckle cast from jeweler-grade architectural bronze",
@@ -90,7 +94,8 @@ export const products = [
     buckleType: "Smooth-Twist 360° Reversible Zinc-Brass Alloy",
     widths: ["34mm"],
     colors: ["Black / Cognac Reversible", "Navy / Dark Brown"],
-    priceEstimate: "$20 - $32 (Wholesale / Bulk)",
+    price: 1899,
+    priceEstimate: "₹1,700 - ₹2,700 (Wholesale / Bulk)",
     description: "The ultimate travel companion. A smooth twist mechanism transitions the belt from black formal to rich cognac casual in half a second.",
     details: [
       "Dual leather face bonded with high-tensile flexible interlining",
@@ -110,7 +115,8 @@ export const products = [
     buckleType: "Matte Black Oxide Heavy Duty Buckle",
     widths: ["38mm"],
     colors: ["Walnut Bark", "Vintage Russet", "Matte Black"],
-    priceEstimate: "$24 - $36 (Wholesale / Bulk)",
+    price: 2199,
+    priceEstimate: "₹2,000 - ₹3,000 (Wholesale / Bulk)",
     description: "Crafted for sportsmen, outdoorsmen, and denim purists. Dense fiber structure prevents stretching or sag even with holster or tool pouch carry.",
     details: [
       "Sourced from audited gold-certified European tanneries",

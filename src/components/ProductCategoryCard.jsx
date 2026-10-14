@@ -92,7 +92,7 @@ export default function ProductCategoryCard({ category, onSelect, onQuoteRequest
                 {category.name}
               </h3>
               <span className="font-bold text-sm text-stone-950 font-sans whitespace-nowrap">
-                $33.00
+                ₹2,499
               </span>
             </div>
             <p className="text-[11px] text-stone-500 font-medium truncate mt-0.5">
@@ -113,7 +113,7 @@ export default function ProductCategoryCard({ category, onSelect, onQuoteRequest
                   name: category.name,
                   articleName: category.articleName || category.name,
                   image: category.image,
-                  price: 33.00,
+                  price: 2499,
                   color: "Black & Brown Duo",
                   width: specs.width || "32mm"
                 });
