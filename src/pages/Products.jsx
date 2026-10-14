@@ -111,28 +111,67 @@ export default function Products({ onOpenQuote, onNavigate }) {
                     />
                   </div>
 
-                  {/* Top-Right: Floating Heart Icon in a White Circle */}
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                    }}
-                    className="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 z-20 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white shadow-lg flex items-center justify-center text-stone-900 hover:scale-110 active:scale-95 transition-all"
-                    aria-label="Save to Wishlist"
-                  >
-                    <Heart className="w-4 h-4 sm:w-4.5 sm:h-4.5 fill-[#e0533c] text-[#e0533c]" />
-                  </button>
+                  {/* --- TOP-RIGHT SCOOPED NOTCH: White Circle with Coral Heart --- */}
+                  <div className="absolute top-0 right-0 z-20 flex items-start pointer-events-none">
+                    {/* Left Concave Fillet */}
+                    <svg className="w-4 h-4 text-[#faf6f0] fill-current flex-shrink-0" viewBox="0 0 16 16" aria-hidden="true">
+                      <path d="M 0 0 H 16 V 16 A 16 16 0 0 1 0 0 Z" />
+                    </svg>
+                    <div className="relative flex flex-col items-end">
+                      {/* Corner Notch Background Block */}
+                      <div className="w-14 h-14 bg-[#faf6f0] rounded-bl-[1.6rem] flex items-center justify-center pointer-events-auto pl-1 pb-1">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                          }}
+                          className="w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center text-stone-900 hover:scale-110 active:scale-95 transition-all"
+                          aria-label="Save to Wishlist"
+                        >
+                          <Heart className="w-4.5 h-4.5 fill-[#e0533c] text-[#e0533c]" />
+                        </button>
+                      </div>
+                      {/* Bottom Concave Fillet */}
+                      <svg className="w-4 h-4 text-[#faf6f0] fill-current -mr-[0.5px]" viewBox="0 0 16 16" aria-hidden="true">
+                        <path d="M 0 0 H 16 V 16 A 16 16 0 0 1 0 0 Z" />
+                      </svg>
+                    </div>
+                  </div>
 
-                  {/* Bottom-Left Edge Overlapping: Bright Yellow Floating QUOTE Button */}
-                  <div className="absolute -bottom-4 left-4 sm:left-5 z-20">
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        onOpenQuote(prod.name);
-                      }}
-                      className="px-6 py-2.5 sm:px-7 sm:py-3 rounded-full bg-[#FFD200] hover:bg-[#FFC000] active:scale-95 text-stone-950 text-xs sm:text-xs font-black uppercase tracking-wider shadow-[0_6px_18px_rgba(255,210,0,0.45)] transition-all flex items-center gap-1.5"
-                    >
-                      <span>QUOTE</span>
-                    </button>
+                  {/* --- BOTTOM-LEFT SCOOPED NOTCH: Bright Yellow Price Pill ($350 / ₹2,499) --- */}
+                  <div className="absolute bottom-0 left-0 z-20 flex flex-col items-start pointer-events-none">
+                    {/* Top Concave Fillet */}
+                    <svg className="w-4 h-4 text-[#faf6f0] fill-current -mb-[0.5px]" viewBox="0 0 16 16" aria-hidden="true">
+                      <path d="M 0 0 A 16 16 0 0 0 16 16 H 0 Z" />
+                    </svg>
+                    <div className="relative flex items-end">
+                      {/* Corner Notch Background Block */}
+                      <div className="pl-3 pb-3 pr-2.5 pt-2.5 bg-[#faf6f0] rounded-tr-[1.6rem] flex items-center pointer-events-auto">
+                        <div 
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            addToCart({
+                              id: prod.id,
+                              name: prod.name,
+                              sku: prod.sku,
+                              image: prod.image,
+                              price: prod.price || 2499,
+                              color: prod.colors[0],
+                              width: prod.widths[0]
+                            });
+                            if (onNavigate) onNavigate('cart');
+                            else window.location.hash = 'cart';
+                          }}
+                          className="px-5 py-2 sm:px-6 sm:py-2.5 rounded-full bg-[#FFD200] hover:bg-[#FFC000] active:scale-95 text-stone-950 font-black text-xs sm:text-sm tracking-wide shadow-sm flex items-center justify-center transition-all cursor-pointer"
+                          title="Add to Cart"
+                        >
+                          <span>₹{(prod.price || 2499).toLocaleString('en-IN')}</span>
+                        </div>
+                      </div>
+                      {/* Right Concave Fillet */}
+                      <svg className="w-4 h-4 text-[#faf6f0] fill-current -ml-[0.5px]" viewBox="0 0 16 16" aria-hidden="true">
+                        <path d="M 0 0 A 16 16 0 0 0 16 16 H 0 Z" />
+                      </svg>
+                    </div>
                   </div>
 
                   {/* Quick View Button for Desktop */}
@@ -149,7 +188,7 @@ export default function Products({ onOpenQuote, onNavigate }) {
                 </div>
 
                 {/* Mobile Full-Width Card Footer with Direct Cart Action (< sm) */}
-                <div className="sm:hidden pt-7 p-4 bg-white/95 flex flex-col justify-between border-t border-stone-200/60 flex-1">
+                <div className="sm:hidden p-4 bg-white/95 flex flex-col justify-between border-t border-stone-200/60 flex-1">
                   <div>
                     <div className="flex items-start justify-between gap-2">
                       <h3 className="font-sans font-bold text-sm text-stone-950 truncate leading-snug">
@@ -193,7 +232,7 @@ export default function Products({ onOpenQuote, onNavigate }) {
                 </div>
 
                 {/* Desktop / Tablet Full Product Body (sm:) */}
-                <div className="hidden sm:flex pt-8 p-5 sm:p-6 flex-1 flex-col justify-between bg-white/90">
+                <div className="hidden sm:flex p-5 sm:p-6 flex-1 flex-col justify-between bg-white/90">
                   <div>
                     <div className="flex items-start justify-between gap-2 mb-1">
                       <h3 className="font-serif text-lg font-bold text-stone-950 leading-snug line-clamp-1 group-hover:text-cognac transition-colors">
