@@ -117,17 +117,21 @@ export default function Navbar({ activePage, setActivePage, onOpenQuote }) {
             <div className="hidden sm:flex items-center gap-2.5">
               <button
                 onClick={() => handleNavClick('cart')}
-                className={`relative p-2.5 rounded-full border transition-all ${
+                className={`group relative p-2.5 rounded-full border transition-all ${
                   activePage === 'cart'
-                    ? 'bg-stone-950 text-white border-stone-900 shadow-sm'
-                    : 'bg-stone-50 hover:bg-stone-100 text-stone-800 border-stone-200'
+                    ? 'bg-[#8c4d28] text-white border-[#8c4d28] shadow-md scale-105'
+                    : 'bg-stone-50 hover:bg-[#8c4d28] text-stone-800 hover:text-white border-stone-200 hover:border-[#8c4d28] shadow-sm hover:shadow-md'
                 }`}
                 aria-label="View Shopping Cart"
                 title="Shopping Cart"
               >
-                <ShoppingBag className="w-4 h-4 text-stone-800" />
+                <ShoppingBag className={`w-4 h-4 transition-colors ${
+                  activePage === 'cart' ? 'text-white' : 'text-stone-800 group-hover:text-white'
+                }`} />
                 {totalItems > 0 && (
-                  <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-[#8c4d28] text-white text-[10px] font-bold flex items-center justify-center shadow-sm">
+                  <span className={`absolute -top-1 -right-1 w-4 h-4 rounded-full text-white text-[10px] font-bold flex items-center justify-center shadow-sm transition-all ${
+                    activePage === 'cart' ? 'bg-stone-950' : 'bg-[#8c4d28] group-hover:bg-stone-950 group-hover:scale-110'
+                  }`}>
                     {totalItems}
                   </span>
                 )}
@@ -135,7 +139,7 @@ export default function Navbar({ activePage, setActivePage, onOpenQuote }) {
 
               <button
                 onClick={onOpenQuote}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-stone-950 hover:bg-stone-800 active:scale-95 shadow-sm transition-all"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-stone-950 hover:bg-[#8c4d28] active:scale-95 shadow-sm transition-all"
               >
                 <span>Order Now</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -146,12 +150,20 @@ export default function Navbar({ activePage, setActivePage, onOpenQuote }) {
             <div className="lg:hidden flex items-center gap-2">
               <button
                 onClick={() => handleNavClick('cart')}
-                className="relative p-2 rounded-xl text-stone-800 hover:text-stone-950 hover:bg-stone-100 border border-stone-200 focus:outline-none transition-colors"
+                className={`group relative p-2 rounded-xl border focus:outline-none transition-all ${
+                  activePage === 'cart'
+                    ? 'bg-[#8c4d28] text-white border-[#8c4d28] shadow-md'
+                    : 'bg-stone-50 hover:bg-[#8c4d28] text-stone-800 hover:text-white border-stone-200 hover:border-[#8c4d28]'
+                }`}
                 aria-label="View Shopping Cart"
               >
-                <ShoppingBag className="w-5 h-5 text-stone-800" />
+                <ShoppingBag className={`w-5 h-5 transition-colors ${
+                  activePage === 'cart' ? 'text-white' : 'text-stone-800 group-hover:text-white'
+                }`} />
                 {totalItems > 0 && (
-                  <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-[#8c4d28] text-white text-[9.5px] font-bold flex items-center justify-center shadow-sm">
+                  <span className={`absolute -top-1 -right-1 w-4 h-4 rounded-full text-white text-[9.5px] font-bold flex items-center justify-center shadow-sm transition-all ${
+                    activePage === 'cart' ? 'bg-stone-950' : 'bg-[#8c4d28] group-hover:bg-stone-950'
+                  }`}>
                     {totalItems}
                   </span>
                 )}
