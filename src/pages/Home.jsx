@@ -2,6 +2,7 @@ import React from 'react';
 import Hero from '../components/Hero';
 import SectionTitle from '../components/SectionTitle';
 import ProductCategoryCard from '../components/ProductCategoryCard';
+import ProductCategoryCarousel from '../components/ProductCategoryCarousel';
 import FeatureCard from '../components/FeatureCard';
 import QuoteForm from '../components/QuoteForm';
 import { beltCategories } from '../data/categories';
@@ -109,17 +110,12 @@ export default function Home({ onOpenQuote, onNavigate }) {
           center={true}
         />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {beltCategories.map((category) => (
-            <ProductCategoryCard
-              key={category.id}
-              category={category}
-              onSelect={() => onNavigate('products')}
-              onQuoteRequest={(name) => onOpenQuote(name)}
-              onNavigate={onNavigate}
-            />
-          ))}
-        </div>
+        <ProductCategoryCarousel
+          categories={beltCategories}
+          onSelect={() => onNavigate('products')}
+          onQuoteRequest={(name) => onOpenQuote(name)}
+          onNavigate={onNavigate}
+        />
       </section>
 
       {/* Craftsmanship Highlights Banner - Subtle Leather Texture */}
